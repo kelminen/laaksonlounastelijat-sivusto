@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lounaslista</title>
+    <style>
+    body {
+    font-family: 'Kumbh Sans', Arial, sans-serif;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('images/kuva6.jpeg'); /* Korvaa polku omalla kuvapolullasi */
+    background-size: 100%; /* Skaalaa kuva täyttämään koko sivu */
+    background-position: center bottom; /* Keskittää kuvan */
+    background-attachment: fixed; /* Kiinnitä taustakuva paikalleen */
+    background-repeat: no-repeat; /* Estä kuvan toistuminen */
+}
+.top-bar {
+    width: 100%;
+    height: 200px;
+    background-color: rgba(0, 0, 0, 0.5); /* Läpinäkyvä musta tausta */
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+        .top-bar h1 {
+            font-family: 'Kumbh Sans', sans-serif; /* Päivitetty fontti */
+            margin: 0;
+            align-items: center;
+            font-size: 2.5rem; /* Suurempi fonttikoko */
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            
+        }
+        
+
+        .iframe-container {
+            display: flex;
+            flex-wrap: wrap; /* Salli rivinvaihto */
+            gap: 40px;
+            justify-content: center;
+            width: 100%; /* Skaalaa koko sivun leveydelle */
+            padding: 250px 10px 10px; /* Lisää tilaa palkin alle */
+            margin-bottom: 50px; /* Lisää tilaa iframejen alapuolelle */
+        }
+        .iframe-wrapper {
+            display: flex;
+            flex-direction: column; /* Esittelyteksti yläpuolelle */
+            align-items: center;
+            max-width: 1200px;
+          
+        }
+        iframe {
+            width: 100%; /* Skaalaa iframet suhteellisesti */
+            max-width: 1200px; /* Aseta maksimileveys */
+            height: 700px; /* Aseta kiinteä korkeus */
+            border: 1px solid #ccc;
+            border-radius: 5px; /* Pyöristetyt kulmat */
+        }
+        .iframe-title {
+            font-family: 'Kumbh Sans', sans-serif; /* Päivitetty fontti */
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Lisää varjo tekstiin */
+            border-radius: 5px; /* Pyöristetyt kulmat */
+        }
+        .viisipennia-button, .pdf-button {
+            font-family: 'Kumbh Sans', sans-serif; /* Päivitetty fontti */
+            background-color: rgb(161, 3, 106);
+            color: beige;
+            border: none;
+            height: 36px;
+            width: 300px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 0; /* Poista ylimääräinen marginaali */
+        }
+        .viisipennia-button:hover, .pdf-button:hover {
+            background-color: rgb(140, 2, 92);
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+        }
+        .phad-thai-container {
+            display: flex;
+            flex-direction: row; /* Aseta iframe ja painikkeet vierekkäin */
+            align-items: center; /* Keskitä pystysuunnassa */
+            gap: 20px; /* Lisää väliä iframen ja painikkeiden väliin */
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column; /* Aseta painikkeet päällekkäin */
+            gap: 10px; /* Lisää väliä painikkeiden väliin */
+        }
+        .phad-thai-container iframe {
+            width: 100%; /* Skaalaa suhteellisesti */
+            max-width: 400px; /* Sama maksimileveys kuin muilla */
+            height: 700px; /* Sama korkeus kuin muilla */
+            border: 1px solid #ccc;
+            border-radius: 5px; /* Pyöristetyt kulmat */
+        }
+
+        /* Oikean reunan painikkeiden säiliö */
+    .side-buttons {
+    position: fixed;
+    top: 50%; /* Keskittää pystysuunnassa */
+    right: -220px; /* Piilota painikkeet kokonaan oikean reunan ulkopuolelle */
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column; /* Aseta painikkeet päällekkäin */
+    gap: 30px; /* Lisää väliä painikkeiden väliin */
+    transition: right 0.3s ease; /* Lisää animaatio painikkeiden liikkeelle */
+    z-index: 1000; /* Aseta painikkeet muiden elementtien yläpuolelle */
+    pointer-events: auto; /* Salli vuorovaikutus painikkeiden kanssa */
+}
+
+/* Näytä painikkeet, kun hiiri viedään oikeaan reunaan */
+body:hover .side-buttons {
+    right: 10px; /* Tuo painikkeet näkyviin */
+}
+
+        /* Painikkeiden tyyli */
+        .side-buttons button {
+            font-family: 'Kumbh Sans', sans-serif; /* Päivitetty fontti */            
+            background-color: rgba(0, 0, 0, 0.7); /* Läpinäkyvä musta */
+            color: white; /* Valkoinen teksti */
+            border: none;
+            height: 70x;
+            width: 250px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Hover-efekti painikkeille */
+        .side-buttons button:hover {
+            background-color: rgb(140, 2, 92);
+            transform: scale(1.05); /* Suurentaa painiketta hieman */
+        }
+
+        .image-gallery {
+            display: flex;
+            justify-content: center; /* Keskittää kuvat vaakasuunnassa */
+            gap: 20px; /* Lisää väliä kuvien väliin */
+            margin-top: 50px; /* Lisää tilaa kuvagallerian yläpuolelle */
+            padding: 20px;
+        }
+
+        .gallery-image {
+            width: 200px; /* Aseta kuvien leveys */
+            height: auto; /* Säilytä kuvasuhde */
+            border-radius: 10px; /* Pyöristetyt kulmat */
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Lisää varjo kuviin */
+            transition: transform 0.3s ease; /* Lisää hover-animaatio */
+        }
+
+        .gallery-image:hover {
+            transform: scale(1.1); /* Suurentaa kuvaa hieman hover-tilassa */
+        }
+
+        .top-bar-title {
+        font-family: 'Kumbh Sans', sans-serif;
+        color: #FFD700; /* Keltainen teksti */
+    font-size: 3rem; /* Suurempi fonttikoko */
+    text-align: center;
+    margin: 0;
+    position: absolute;
+    top: 50%; /* Keskittää pystysuunnassa */
+    left: 50%; /* Keskittää vaakasuunnassa */
+    transform: translate(-50%, -50%); /* Keskittää tekstin tarkasti */
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7); /* Vahvempi varjo */
+    background-color: rgba(0, 0, 0, 0.5); /* Musta, 50% läpinäkyvä tausta */
+    padding: 15px 30px; /* Lisää tilaa tekstin ympärille */
+    border-radius: 10px; /* Pyöristetyt kulmat */
+    letter-spacing: 2px; /* Lisää kirjainten välistystä */
+}
+
+p:not(.iframe-title) {
+    font-family: 'Kumbh Sans', sans-serif; /* Päivitetty fontti */
+    font-size: 2rem; /* Suurempi fonttikoko */
+    color: white; /* Valkoinen teksti */
+    text-align: center; /* Keskittää tekstin */
+    margin-top: 20px; /* Lisää tilaa yläpuolelle */
+    margin-bottom: 20px; /* Lisää tilaa alapuolelle */
+    line-height: 1.8; /* Lisää riviväliä */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Lisää vahvempi varjo tekstiin */
+    background-color: rgba(0, 0, 0, 0.5); /* Musta, 50% läpinäkyvä tausta */
+    padding: 15px 30px; /* Lisää tilaa tekstin ympärille */
+    border-radius: 10px; /* Pyöristetyt kulmat */
+    max-width: 800px; /* Rajoita tekstin leveys */
+    margin-left: auto; /* Keskittää tekstin vaakasuunnassa */
+    margin-right: auto; /* Keskittää tekstin vaakasuunnassa */
+}
+
+
+    </style>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap"
+rel="stylesheet"
+/>
+
+
+</head>
+<body>
+    <!-- Valkoinen palkki -->
+    <div class="top-bar">
+        <h1 class="top-bar-title">LAAKSON LOUNASTELIJAT</h1>
+    </div>
+
+    <div class="iframe-container">
+        <!-- Ylärivi -->
+        <div class="iframe-wrapper">
+            <p class="iframe-title">Nordis</p>
+            <iframe src="https://www.lounaat.info/lounas/ravintola-nordis/helsinki" title="Nordis"></iframe>
+        </div>
+        <div class="iframe-wrapper">
+            <p class="iframe-title">Kahvila Welldone</p>
+            <iframe src="http://kahvilawelldone.fi" title="Welldone"></iframe>
+        </div>
+        <div class="iframe-wrapper">
+            <p class="iframe-title">Il Trio</p>
+            <iframe src="https://iltrio.fi/lounas/" title="iltrio"></iframe>
+        </div>
+        <!-- Alarivi -->
+        <div class="iframe-wrapper phad-thai-container">
+            <div>
+                <p class="iframe-title">Phad Thai</p>
+                <iframe src="https://phadthai.fi" title="Phad Thai"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Oikean reunan painikkeet -->
+    <div class="side-buttons">
+        <a href="https://viisipennia.fi/lounas/" target="_blank">
+            <button class="viisipennia-button">VIISI PENNIÄ LOUNASLISTA</button>
+        </a>
+        <a href="https://www.scandichotels.com/RestaurantService/RestaurantMenuService/GetMenufile?hotelId=663&restId=rest0&fileId=87334&_gl=1*1tmdslj*_gcl_aw*R0NMLjE3NDY5MDk2NDYuQ2owS0NRanc4dnZBQmhDY0FSSXNBT0Nmd3dwODRucktLd2huNWw1Vmp6NXh0VlA2V29Qcl9DVk5wY2R2bUc2ZmtRcTVVcDBhS21hMVpVQWFBcTdrRUFMd193Y0I.*FPAU*OTkwOTIxODQ5LjE3NDY1NTU1NTI.*_ga*NDYxOTQ0MjQyLjE3NDY1NTU1NTI.*_ga_1MJCCJYC3Z*czE3NDY5MDk2NDMkbzQkZzEkdDE3NDY5MDk2NDYkajAkbDAkaDU5NDE4MTg0Mg..*_fplc*VjJYJTJGRGJxMVhZMHhPRDhLdXNIYzZnc2lWV2czbVY1S3NWNDR6Yk9jNHphVkVYTjVETFJwcnQlMkY2V0F6MDgyTHVTSEtONDNNbHJ0ZGxNRWRjWkdiSXdWSDdsRkY0MXd2aVoyT05ucGlqM3N2dE9EN3MlMkJ1WVlLSTJOa01GcTZBJTNEJTNE" target="_blank">
+            <button class="pdf-button">SCANDIC LOUNASLISTA</button>
+        </a>
+    </div>
+
+   
+    <P> "Let food be thy medicine and medicine be thy food" 
+     - Hippocrates -</P>
+
+        
+
+    
+</div>
+
+
+</body>
+</html>
+
